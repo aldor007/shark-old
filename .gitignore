@@ -256,7 +256,7 @@ examples/Unsupervised/*.cpp
 /examples/Unsupervised/cl1.csv
 
 # /include/shark/Core/
-/include/shark/Core/Shark.h
+# /include/shark/Core/Shark.h
 
 # /src/
 /src/*.dsp
