@@ -36,6 +36,10 @@ mark_as_advanced(
 	CMAKE_LIBRARY_OUTPUT_DIRECTORY
 	CMAKE_ARCHIVE_OUTPUT_DIRECTORY
 )
+#=======================================================
+# C++11
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
 
 #####################################################################
 # Static/Shared libraries
@@ -358,7 +362,9 @@ add_subdirectory( src )
 #                       Include Examples
 #####################################################################
 option( BUILD_EXAMPLES "Build example programs." ON )
-add_subdirectory( examples )
+if(BUILD_EXAMPLES)
+	add_subdirectory( examples )
+endif()
 
 #####################################################################
 #                       Include Unit Tests
@@ -433,8 +439,8 @@ install(EXPORT SharkTargets DESTINATION "${INSTALL_CMAKE_DIR}" COMPONENT dev)
 #                  Configure the Shark.h file
 #####################################################################
 configure_file (
-	"${CMAKE_SOURCE_DIR}/include/shark/Core/Shark.h.in"
-	"${CMAKE_BINARY_DIR}/include/shark/Core/Shark.h"
+	"include/shark/Core/Shark.h.in"
+	"include/shark/Core/Shark.h"
 )
 install(FILES
 	"${CMAKE_BINARY_DIR}/include/shark/Core/Shark.h"
@@ -452,6 +458,3 @@ configure_file(
 	"${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
 	IMMEDIATE @ONLY)
 
-add_custom_target(uninstall
-	COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake
-)
